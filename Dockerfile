@@ -6,7 +6,7 @@ RUN apt-get update -yq && \
     echo insecure >> ~/.curlrc && \
     echo Y | curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
     echo Y | curl -L --insecure get.rvm.io | bash -s stable && \
-    . /usr/local/rvm/scripts/rvm && \
+    passthru("/bin/bash -c '. /usr/local/rvm/scripts/rvm'") && \
     apt-get update && \
     echo Y | rvm install 2.3.3 && \
     echo Y | rvm use 2.3.3 && \
