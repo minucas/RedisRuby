@@ -3,7 +3,6 @@ FROM ubuntu:14.04.4
 # Install Redis-trib.rb Environment
 RUN apt-get update -yq && \
     apt-get install -yq ruby curl && \
-    # echo Y | curl -L --insecure get.rvm.io | bash -s stable && \
     echo insecure >> ~/.curlrc && \
     echo Y | curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
     echo Y | curl -L --insecure get.rvm.io | bash -s stable && \
