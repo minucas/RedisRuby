@@ -1,15 +1,9 @@
-FROM ubuntu:14.04.4
+FROM redis
 
-# Install Redis-trib.rb Environment
-RUN apt-get update -yq && \
-    apt-get install -yq ruby curl && \
-    echo insecure >> ~/.curlrc && \
-    echo Y | curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
-    echo Y | curl -L --insecure get.rvm.io | bash -s stable && \
-    passthru("/bin/bash -c '. /usr/local/rvm/scripts/rvm'") && \
-    apt-get update && \
-    echo Y | rvm install 2.3.3 && \
-    echo Y | rvm use 2.3.3 && \
-    echo Y | gem install redis && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get -y update \
+  && apt-get -y upgrade \
+  && apt-get -y --no-install-recommends install ruby \
+  && gem install redis \
+  && apt-get -y autoremove \
+  && apt-get -y clean
